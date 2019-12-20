@@ -1,0 +1,24 @@
+.navbar {
+    background-color: orange;
+
+    .navbar-toggler {
+        background-color: #FFF;
+        color: orange;
+        outline: none;
+        width: 75px;
+
+        .navbar-toggler-icon {
+            margin-right: 25px;
+            margin-top: 10px;
+        }
+    }
+    
+    .active {
+        border-bottom: solid 2px rgb(219, 143, 0);
+    }
+
+    .nav-link {
+        color:  #FFF;
+    }
+
+}

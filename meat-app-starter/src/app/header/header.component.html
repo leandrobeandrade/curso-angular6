@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand text-white" routerLink="/">Meat app</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon">Menu</span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/restaurants']">Restaurantes</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/about']">Sobre</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--
+
+  routerLink pode ser utilizado de 2 maneiras
+
+  1- routerLink="/link"
+  2- [routerLink]="['/link']"
+
+-->
