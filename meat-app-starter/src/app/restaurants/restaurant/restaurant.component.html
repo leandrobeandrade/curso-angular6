@@ -1,17 +1,16 @@
 <a href="#">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="place-info-box">
-          <span class="place-info-box-icon"><img [src]="restaurant.imagePath"></span>
-
-          <div class="place-info-box-content">
-            <span class="place-info-box-text">{{ restaurant.name }}</span>
-            <span class="place-info-box-star">{{ restaurant.rating }}</span>
-            <span class="place-info-box-detail">{{ restaurant.category }}</span>
-            <span class="place-info-box-detail">{{ restaurant.deliveryEstimate }}</span>
-          </div>
-        </div>
+  <div class="place-info-box">
+    <div class="row"> 
+      <div class="col-md-2 col-sm-2">
+        <span class="place-info-box-icon"><img [src]="restaurant.imagePath"></span>
+      </div>
+      <div class="col-md-8 col-sm-8 places">
+        <p class="place-info-box-text">{{ restaurant.name }}</p>
+        <p class="place-info-box-detail">{{ restaurant.category }}</p>
+        <p class="place-info-box-detail">{{ restaurant.deliveryEstimate }}</p>
+      </div>
+      <div class="col-md-2 col-sm-2 places">
+        <span class="place-info-box-star float-right">{{ restaurant.rating }}</span>
       </div>
     </div>
   </div>

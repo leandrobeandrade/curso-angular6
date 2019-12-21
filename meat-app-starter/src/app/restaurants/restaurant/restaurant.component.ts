@@ -7,11 +7,12 @@ import { Restaurant } from './restaurant.model';
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent implements OnInit {
-  @Input() restaurant: Restaurant;
+  @Input() restaurant: Restaurant[] = [];
 
   constructor() { }
 
   ngOnInit() {
   }
+  
 
 }

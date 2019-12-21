@@ -1,0 +1,55 @@
+.t {
+    height: 100px;
+    background-color: #FFF;
+    width: 100%;
+}
+
+.place-info-box {
+    background-color: #FFF;
+    width: 100%;
+    
+    img {
+        width: 200px;
+        height: 200px;
+    }
+    .places{
+        padding-top: 10px;
+        padding-left: 60px;
+        padding-right: 25px;
+    
+        .place-info-box-text, .place-info-box-star {
+            color: rgb(129, 123, 123);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .place-info-box-detail {
+            color: #999;
+            margin-top: -15px;
+        }
+    }
+    
+}
+
+.tablink {
+    background-color: #FFF;
+    color: #999;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 50%;
+    margin-top: -7px;
+  }
+  
+  .tablink:hover {
+    border-bottom: solid 1px red;
+  }
+  
+  /* Style the tab content (and add height:100% for full page content) */
+  .tabcontent {
+    color: white;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+  }

@@ -1,0 +1,26 @@
+a { text-decoration: none; }
+
+.place-info-box {
+    background-color: #FFF;
+    
+    img {
+        width: 130px;
+        height: 130px;
+    }
+    .places{
+        padding-top: 10px;
+        padding-left: 60px;
+        padding-right: 25px;
+    
+        .place-info-box-text, .place-info-box-star {
+            color: rgb(129, 123, 123);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .place-info-box-detail {
+            color: #999;
+            margin-top: -15px;
+        }
+    }
+    
+}
