@@ -38,7 +38,7 @@ import { CartService } from './restaurant-detail/cart/cart.service';
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [CartService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [CartService, /*{provide: LOCALE_ID, useValue: 'pt-BR'}*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
