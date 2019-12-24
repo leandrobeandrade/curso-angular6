@@ -1,43 +1,35 @@
-<div class="container">
-  <div class="row">
+<div class="container" *ngIf="restaurant">
+  <div class="row mt-2">
     <div class="place-info-box">
-      <div class="row"> 
+      <div class="row">
         <div class="col-md-2 col-sm-2">
-          <span class="place-info-box-icon"><img src="../../assets/img/restaurants/breadbakery.png"></span>
+          <span class="place-info-box-icon"><img [src]="restaurant.imagePath"></span>
         </div>
-        <div class="col-md-8 col-sm-8 places">
-          <p class="place-info-box-text">Categoria</p>
-          <p class="place-info-box-detail">Padaria</p>
-          <p class="place-info-box-detail">Quem somos</p>
-        </div>
-        <div class="col-md-2 col-sm-2 places">
-          <span class="place-info-box-star float-right">{{ restaurant.rating }}</span>
+        <div class="col-md-10 col-sm-8 places">
+          <h4 class="float-right">
+            <i class="fas fa-star"></i> {{ restaurant.rating }} - {{ restaurant.name }}
+          </h4>
+          <h5>Categoria</h5>
+          <p class="place-info-box-text">{{ restaurant.category }}</p>
+          <h5 class="h-5">Quem somos</h5>
+          <p class="place-info-box-detail">{{ restaurant.about }}</p>
+          <h5 class="h-5">Horário de Funcionamento</h5>
+          <p class="place-info-box-detail">{{ restaurant.hours }}</p>
         </div>
       </div>
     </div>
-    <button class="tablink">Menu</button>
-    <button class="tablink">Avaliações</button>
+    <a class="tablink" (click)="menu()" routerLinkActive="detail-active" 
+    [routerLink]="['menu']">Cardápio</a>
+    <a class="tablink" (click)="aval()" routerLinkActive="detail-active" 
+    [routerLink]="['reviews']">Avaliações</a>
   </div>
-</div>
 
+  <div *ngIf="_menu == true; else avaliacao">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <ng-template #avaliacao>
+    <app-reviews></app-reviews>
+  </ng-template>
 
-
-<div id="Home" class="tabcontent">
-  <h3>Home</h3>
-  <p>Home is where the heart is..</p>
-</div>
-
-<div id="News" class="tabcontent">
-  <h3>News</h3>
-  <p>Some news this fine day!</p>
-</div>
-
-<div id="Contact" class="tabcontent">
-  <h3>Contact</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
-</div>
-
-<div id="About" class="tabcontent">
-  <h3>About</h3>
-  <p>Who we are and what we do.</p>
 </div>
