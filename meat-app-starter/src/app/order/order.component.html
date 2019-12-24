@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 section bg-white mt-3 mb-3 p-3">
+      <h4><i class="fas fa-shopping-cart"></i> 
+        <span class="h4"> Finalize o seu pedido</span>
+      </h4>
+      <hr>
+
+      <form #form="ngForm" novalidate>
+        <div class="form-group">                <!-- INPUTS -->
+          <label>Endereço de Entrega:</label>
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control mb-3" placeholder="Endereço *"
+              [class.has-success]="End.valid && (End.dirty || End.touched)" 
+              [class.has-error]="!End.valid && (End.dirty || End.touched)"  
+              autocomplete="off" name="end" #End="ngModel" ngModel required minlength="5">
+
+              <span class="sp-success" *ngIf="End.valid && (End.dirty || End.touched)">
+                OK
+              </span>
+              <span class="sp-error" *ngIf="!End.valid && (End.dirty || End.touched)">
+                Campo Obrigatório
+              </span>
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control mb-3" placeholder="Número *"
+              [class.has-success]="Num.valid && (Num.dirty || Num.touched)" 
+              [class.has-error]="!Num.valid && (Num.dirty || Num.touched)"  
+              autocomplete="off" name="num" #Num="ngModel" ngModel required pattern="^[0-9]*$">
+
+              <span class="sp-success" *ngIf="Num.valid && (Num.dirty || Num.touched)">
+                OK
+              </span>
+              <span class="sp-error" *ngIf="!Num.valid && (Num.dirty || Num.touched)">
+                Campo Obrigatório
+              </span>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control mb-3" placeholder="Complemento"
+                autocomplete="off" name="com" ngModel>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">                <!-- TABELA -->
+          <label class="mt-3">Itens do Pedido:</label>
+          <div class="table-responsive">
+            <app-order-item></app-order-item>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">                <!-- RADIOS -->
+            <label>Formas de Pagamento:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="r1" value="r1"
+                [checked]="radio == 'r1'" (click)="radios($event.target.value)">
+              <label class="form-check-label" for="r1">
+                Dinheiro
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="r2" value="r2"
+                [checked]="radio == 'r2'" (click)="radios($event.target.value)">
+              <label class="form-check-label" for="r2">
+                Cartão de Débito
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">                <!-- VALORES -->
+            <label>Frete e Total:</label>
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th style="width:50%">Itens:</th>
+                    <td class="text-right">R$ 20,00</td>
+                  </tr>
+                  <tr>
+                    <th>Frete:</th>
+                    <td class="text-right">R$ 8,00</td>
+                  </tr>
+                  <tr>
+                    <th>Total:</th>
+                    <td class="text-right">R$ 28,00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">                         <!-- BOTÃO -->
+        <div class="col-md-12">
+          <div class="mt-5 float-right">
+            <button class="btn btn-success" [disabled]="form.invalid" (click)="t()">
+              <i class="fa fa-credit-card"></i> Concluir Pedido
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,13 +4,15 @@
       <div class="col-md-2 col-sm-2">
         <span class="place-info-box-icon"><img [src]="restaurant.imagePath"></span>
       </div>
-      <div class="col-md-8 col-sm-8 places">
+      <div class="col-md-7 col-sm-7 places">
         <p class="place-info-box-text">{{ restaurant.name }}</p>
         <p class="place-info-box-detail">{{ restaurant.category }}</p>
         <p class="place-info-box-detail">{{ restaurant.deliveryEstimate }}</p>
       </div>
-      <div class="col-md-2 col-sm-2 places">
-        <span class="place-info-box-star float-right">{{ restaurant.rating }}</span>
+      <div class="col-md-3 col-sm-3 places">
+        <span class="place-info-box-star float-right">
+          <i class="fas fa-star"></i> {{ restaurant.rating }}
+        </span>
       </div>
     </div>
   </div>
