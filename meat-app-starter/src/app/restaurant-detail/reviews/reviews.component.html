@@ -1,6 +1,6 @@
 <div class="row mt-4">
   <div class="col-md-6 mb-4" *ngFor="let review of reviews">
-    <div class="tabcontent">
+    <div class="tabcontent" [@reviewAppeared]="reviewState">
       <p>
         <img *ngIf="review.rating < 3" class="reactions" 
           src="../../assets/img/reactions/pissed.png">

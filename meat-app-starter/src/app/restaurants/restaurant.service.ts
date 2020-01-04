@@ -32,4 +32,14 @@ export class RestaurantService {
     .pipe((response: any) => response)
   }
 
+  restaurantesSearch(search: string): Observable<Restaurant[]> {
+    return this.http.get(`${MEAT_API}/restaurants`, { params: {q: search}})
+    .pipe((response: any) => response)
+  }
 }
+
+
+
+/* 
+  parametro q => pega todos os dados e não somente uma propriedade
+*/

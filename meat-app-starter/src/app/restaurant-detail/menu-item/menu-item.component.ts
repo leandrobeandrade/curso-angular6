@@ -3,14 +3,26 @@ import { RestaurantService } from 'src/app/restaurants/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MenuItem } from '../menu-item/menu-item.model';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-menu-item',
   templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.scss']
+  styleUrls: ['./menu-item.component.scss'],
+  animations: [
+    trigger('mItemAppeared', [
+      state('ready', style({opacity: 1})),
+      transition('void => ready', [
+        style({opacity: 0, transform: 'translateY(-40px)'}),
+        animate('500ms 0s ease-in')
+      ])
+    ])
+  ]
 })
 export class MenuItemComponent implements OnInit {
-  protected menu: Observable<MenuItem[]>
+  protected menu: Observable<MenuItem[]>;
+
+  mItemState: string = 'ready'
 
   constructor(
     private restaurantService: RestaurantService, 

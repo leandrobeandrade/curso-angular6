@@ -6,15 +6,51 @@
       </h4>
       <hr>
 
+      <form [formGroup]="orderForm" novalidate>
+        <div class="form-group">                <!-- INPUTS - REACTIVE FORMS -->
+          <label>Seus Dados:</label>
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control mb-3" placeholder="Nome *"
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+              autocomplete="off" formControlName="name">
+
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Campo Nome obrigatório</div>
+                <div *ngIf="f.name.errors.minlength">Necessário 5 ou mais caracteres</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <input type="email" class="form-control mb-3" placeholder="E-mail"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              autocomplete="off" formControlName="email">
+
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Campo E-mail obrigatório</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <input type="email" class="form-control mb-3" placeholder="Confirme o E-mail"
+              [ngClass]="{ 'is-invalid': submitted && f.emailConfirmation.errors }"
+              autocomplete="off" formControlName="emailConfirmation">
+
+              <div *ngIf="submitted && f.emailConfirmation.errors" class="invalid-feedback">
+                <div *ngIf="f.emailConfirmation.errors.required">Campo Confirmar E-mail obrigatório</div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </form>
+
       <form #form="ngForm" novalidate>
-        <div class="form-group">                <!-- INPUTS -->
+        <div class="form-group">                <!-- INPUTS - TEMPLATE FORMS -->
           <label>Endereço de Entrega:</label>
           <div class="row">
             <div class="col-md-6">
               <input type="text" class="form-control mb-3" placeholder="Endereço *"
               [class.has-success]="End.valid && (End.dirty || End.touched)" 
               [class.has-error]="!End.valid && (End.dirty || End.touched)"  
-              autocomplete="off" name="end" #End="ngModel" ngModel required minlength="5">
+              autocomplete="off" name="address" #End="ngModel" ngModel required minlength="5">
 
               <span class="sp-success" *ngIf="End.valid && (End.dirty || End.touched)">
                 OK
@@ -27,7 +63,7 @@
               <input type="text" class="form-control mb-3" placeholder="Número *"
               [class.has-success]="Num.valid && (Num.dirty || Num.touched)" 
               [class.has-error]="!Num.valid && (Num.dirty || Num.touched)"  
-              autocomplete="off" name="num" #Num="ngModel" ngModel required pattern="^[0-9]*$">
+              autocomplete="off" name="number" #Num="ngModel" ngModel required pattern="^[0-9]*$">
 
               <span class="sp-success" *ngIf="Num.valid && (Num.dirty || Num.touched)">
                 OK
@@ -38,7 +74,7 @@
             </div>
             <div class="col-md-4">
               <input type="text" class="form-control mb-3" placeholder="Complemento"
-                autocomplete="off" name="com" ngModel>
+                autocomplete="off" name="optionalAddress" ngModel>
             </div>
           </div>
         </div>
@@ -46,62 +82,57 @@
         <div class="form-group">                <!-- TABELA -->
           <label class="mt-3">Itens do Pedido:</label>
           <div class="table-responsive">
-            <app-order-item></app-order-item>
+            <app-order-item [items]="cartItems()" (increaseQty)="increaseQty($event)" 
+              (decreaseQty)="decreaseQty($event)" (remove)="remove($event)"></app-order-item>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">                <!-- RADIOS -->
+          <div class="col-md-6 mt-3">           <!-- RADIOS -->
             <label>Formas de Pagamento:</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="r1" value="r1"
-                [checked]="radio == 'r1'" (click)="radios($event.target.value)">
-              <label class="form-check-label" for="r1">
+              <input class="form-check-input" type="radio" name="radio" value="r1" ngModel
+                id="radio1" required>
+              <label class="form-check-label" for="radio1">
                 Dinheiro
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="r2" value="r2"
-                [checked]="radio == 'r2'" (click)="radios($event.target.value)">
-              <label class="form-check-label" for="r2">
+              <input class="form-check-input" type="radio" name="radio" value="r2" ngModel
+                id="radio2" required>
+              <label class="form-check-label" for="radio2">
                 Cartão de Débito
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radio" value="r3" ngModel
+                id="radio3" required>
+              <label class="form-check-label" for="radio3">
+                Cartão Refeição
               </label>
             </div>
           </div>
 
-          <div class="col-md-6">                <!-- VALORES -->
+          <div class="col-md-6 mt-3">           <!-- VALORES -->
             <label>Frete e Total:</label>
-            <div class="table-responsive">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th style="width:50%">Itens:</th>
-                    <td class="text-right">R$ 20,00</td>
-                  </tr>
-                  <tr>
-                    <th>Frete:</th>
-                    <td class="text-right">R$ 8,00</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td class="text-right">R$ 28,00</td>
-                  </tr>
-                </tbody>
-              </table>
+            <app-delivery-costs 
+              [delivery]="delivery" 
+              [itemsValue]="itemsValue()">
+            </app-delivery-costs>
+          </div>
+        </div>
+
+        <div class="row">                         <!-- BOTÃO -->
+          <div class="col-md-12">
+            <div class="mt-5 float-right">
+              <button class="btn btn-success" (click)="checkOrder(form.value)" 
+                [disabled]="form.invalid || cartItems().length == 0">
+                <i class="fa fa-credit-card"></i> Concluir Pedido
+              </button>
             </div>
           </div>
         </div>
       </form>
-
-      <div class="row">                         <!-- BOTÃO -->
-        <div class="col-md-12">
-          <div class="mt-5 float-right">
-            <button class="btn btn-success" [disabled]="form.invalid" (click)="t()">
-              <i class="fa fa-credit-card"></i> Concluir Pedido
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

@@ -1,9 +1,27 @@
 
 <div class="container">
-  <h1 class="mt-2 mb-2">Todos os Restaurantes</h1>
+  <div class="row">
+    <div class="col-md-7">
+      <h1 class="mt-4 mb-3">Todos os Restaurantes</h1>
+    </div>
+    <div class="col-md-5">
+      <form [formGroup]="searchForm" class="form-inline mt-4 float-right">
+        <input class="form-control search" type="search" placeholder="Pesquisar" 
+        [@search]="searchState" formControlName="searchControl">
+        <button class="btn btn-outline-success" (click)="toggleSearch()">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+    
   <div class="row">
     <div class="col-md-6 mb-4" *ngFor="let restaurant of restaurants">
       <app-restaurant [restaurant]="restaurant"></app-restaurant>
+    </div>
+
+    <div class="col-md-12 bg-white p-4 mt-5" *ngIf="restaurants?.length == 0">
+      <p class="lead text-center mt-3">Não foram encontrados itens desta busca!</p>
     </div>
   </div>
 </div>

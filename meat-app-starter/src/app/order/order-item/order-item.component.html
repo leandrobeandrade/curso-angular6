@@ -1,4 +1,4 @@
-<div class="bg-light text-center p-3" *ngIf="!items; else tabela">
+<div class="bg-light text-center p-3" *ngIf="items.length == 0; else tabela">
   <p>Não há itens no seu carrinho!</p>
   <small>Começe adicionando produtos ao carrinho <a [routerLink]="['/restaurants']">aqui</a></small>
 </div>
@@ -17,16 +17,20 @@
     <tbody *ngFor="let item of items">
       <tr>
         <td class="text-center">
-          <a class="btn btn-sm" (click)="emitDecreaseQty(item)"><i class="fa fa-minus"></i></a>
+          <a class="btn btn-sm" (click)="emitDecreaseQty(item)">
+            <i class="fas fa-minus-square text-warning"></i></a>
           {{ item.quantity }}
-          <a class="btn btn-sm" (click)="emitIncreaseQty(item)"><i class="fa fa-plus"></i></a>
+          <a class="btn btn-sm" (click)="emitIncreaseQty(item)">
+            <i class="fas fa-plus-square text-primary"></i></a>
         </td>
         <td>{{ item.menuItem.name }}</td>
 
         <td>{{ item.menuItem.description }}</td>
         <td class="text-right">{{ item.value() | currency: 'BRL': 'symbol' }}</td>
         <td class="text-right">
-          <a class="btn btn-sm danger" (click)="emitRemove(item)"><i class="fa fa-remove"></i></a>
+          <a class="btn btn-sm danger" (click)="emitRemove(item)">
+            <i class="fas fa-trash-alt text-danger"></i>
+          </a>
         </td>
       </tr>
     </tbody>

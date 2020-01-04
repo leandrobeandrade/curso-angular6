@@ -7,8 +7,13 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderComponent } from './order/order.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './security/login/login.component';
+import { OrderGuard } from './order/order-guard';
 
 export const ROUTES: Routes = [
+    {path: 'login', component: LoginComponent},
     {path: '', component: HomeComponent},
     {path: 'restaurants', component: RestaurantsComponent},
     {path: 'restaurants/:id', component: RestaurantDetailComponent,
@@ -18,6 +23,8 @@ export const ROUTES: Routes = [
             {path: 'reviews', component: ReviewsComponent},
         ]    
     },
-    {path: 'order', component: OrderComponent},
-    {path: 'about', component: AboutComponent}
+    {path: 'order', component: OrderComponent, canDeactivate: [OrderGuard]},
+    {path: 'order-summary', component: OrderSummaryComponent},
+    {path: 'about', component: AboutComponent},
+    {path: '**', component: NotFoundComponent} // Rota WildCard
 ]

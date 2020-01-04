@@ -6,9 +6,9 @@ export class ErrorHandler {
     let errorMessage: string
     
     if (error instanceof HttpErrorResponse) {
-      const body = error.message || ''
-      const err = body || JSON.stringify(body)
-      errorMessage = `${error.url}: ${error.status} - ${error.statusText || ''} ${err}`
+      const body = error.error || ''
+      // const err = body || JSON.stringify(body)
+      errorMessage = `${error.url}: ${error.status} - ${error.statusText || ''} ${body}`
     }
     else {
       errorMessage = error.message ? error.message : error.toString()

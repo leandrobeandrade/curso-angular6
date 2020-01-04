@@ -17,3 +17,12 @@
 .sp-error {
     color: red;
 }
+
+input[type="radio"], .form-check-label {
+    cursor: pointer;
+}
+
+// Recative forms
+.invalid-feedback {
+    color:  red;
+}
